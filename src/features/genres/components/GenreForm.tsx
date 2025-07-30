@@ -3,7 +3,7 @@ import type CreateGenre from '../models/CreateGenre.model';
 import {type SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import Button from "../../../components/Button.js";
-import firstLetterUpperCase from "../../../validation.js";
+import firstLetterUpperCase from "../../validations/firstLetterUpperCase.ts";
 import {NavLink} from "react-router";
 export default function GenreForm(props: GenreFormProps) {
     const {register, handleSubmit, formState: {errors, isValid, isSubmitting}} = useForm<CreateGenre>({
