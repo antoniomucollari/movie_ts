@@ -25,7 +25,7 @@ export default function SelectImage(props:SelectImgProps){
         <div className="form-group">
             <label htmlFor="image">Select Image</label>
             <div>
-                <input type="file" accept=".jpg,.png,.jpeg" onChange={handleOnChange} />
+                <input id="image" type="file" accept=".jpg,.png,.jpeg" onChange={handleOnChange} />
             </div>
             {imageBase64 ?<div>
                 <img src={imageBase64} alt="selected image"/>
