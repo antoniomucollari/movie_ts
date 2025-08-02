@@ -3,4 +3,7 @@ export default interface MovieCreation {
     releaseDate?: string;
     trailer?: string;
     picture?: File | string;
+    genreIds?: number[];
+    theaterIds?: number[];
+
 }

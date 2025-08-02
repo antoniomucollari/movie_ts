@@ -1,15 +1,12 @@
-import type ActorCreation from "../models/ActorCreation.ts";
 import {type SubmitHandler, useForm} from "react-hook-form";
 import Button from "../../../components/Button.tsx";
 import {NavLink} from "react-router";
 import * as yup from "yup";
 import firstLetterUpperCase from "../../validations/firstLetterUpperCase.ts";
-import dateMustNotBeInTheFuture from "../../validations/dateMustNotBeInTheFuture.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
-import SelectImage from "../../../components/SelectImage/SelectImage.tsx";
 import type TheaterCreation from "../models/TheaterCreation.ts";
 export default function TheaterForm(props: TheaterFormProps){
-    const {register,handleSubmit, setValue,formState:{errors,isValid,isSubmitting}} = useForm<ActorCreation>({
+    const {register,handleSubmit,formState:{errors,isValid,isSubmitting}} = useForm<ActorCreation>({
         resolver: yupResolver(validationRules),
         defaultValues: props.model?? {name: ''},
         mode: "onChange"
@@ -24,13 +21,6 @@ export default function TheaterForm(props: TheaterFormProps){
                     <input id="name" autoComplete="off" className='form-control' {...register('name')}/>
                     {errors.name && <p className="error">{errors.name.message}</p>}
                 </div>
-
-                {/*<div className="form-group">*/}
-                {/*    <label htmlFor="dateOfBirth">Date Of Birth</label>*/}
-                {/*    <input autoComplete="off" className='form-control' type='date' {...register('dateOfBirth')}/>*/}
-                {/*    {errors.dateOfBirth && <p className="error">{errors.dateOfBirth.message}</p>}*/}
-                {/*</div>*/}
-                {/*<SelectImage imgUrl={currentImageURL} selectedImage={file=> setValue('picture', file)}/>*/}
                 <div className="mt-2">
                     <Button type='submit' disabled={!isValid || isSubmitting}>{isSubmitting ? 'Sending...' : 'Send'} </Button>
                     <NavLink to='/theaters' className="btn btn-secondary ms-2">Cancel</NavLink>

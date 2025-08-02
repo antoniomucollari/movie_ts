@@ -4,6 +4,8 @@ import type {SubmitHandler} from "react-hook-form";
 import Loading from "../../../components/Loading.tsx";
 import type MovieCreation from "../models/MovieCreation.model.ts";
 import MovieForm from "./MovieForm.tsx";
+import type FilterMoviesDTO from "../../genres/models/Genre.model.ts";
+import type Theater from "../../theters/models/Theater.model.ts";
 
 
 export default function EditMovies() {
@@ -15,6 +17,11 @@ export default function EditMovies() {
         },800);
         return () => {clearTimeout(timerId);}
     }, [id]);
+    const nonSelectedGenres: FilterMoviesDTO[] = [{id:1, name: 'Action'}]
+    const selectedGenres: FilterMoviesDTO[] = [{id:2, name: 'Drama'}]
+
+    const nonSelectedTheaters: Theater[] = [{id:1, name: 'Cineplexx', latitude: 12, longitude: 12}]
+    const selectedTheaters: Theater[] = [{id:2, name: 'Millennium', latitude: 12, longitude: 12}]
     const onSubmit : SubmitHandler<MovieCreation> = async (data) =>{
         await new Promise(resolve => setTimeout(resolve, 700));
         console.log(data)
@@ -22,7 +29,7 @@ export default function EditMovies() {
     return (
         <>
             <h3>Edit Movie with id:  {id}</h3>
-            {model? <MovieForm onSubmit={onSubmit} model={model} /> : <Loading/>}
+            {model? <MovieForm selectedTheaters={selectedTheaters} nonSelectedTheaters={nonSelectedTheaters} onSubmit={onSubmit} model={model} nonSelectedGenres={nonSelectedGenres} selectedGenres={selectedGenres} /> : <Loading/>}
         </>
     )
 }
