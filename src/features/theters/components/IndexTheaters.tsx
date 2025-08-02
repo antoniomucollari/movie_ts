@@ -4,7 +4,7 @@ export default function IndexTheaters() {
     return (
         <>
             <h3>Theaters  </h3>
-            <NavLink className="btn btn-primary" to='/actors/create'>Create Theaters</NavLink>
+            <NavLink className="btn btn-primary" to='/theaters/create'>Create Theaters</NavLink>
         </>
     )
 }

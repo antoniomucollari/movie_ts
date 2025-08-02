@@ -29,7 +29,7 @@ export default function ActorForm(props: ActorFormProps){
                     <input autoComplete="off" className='form-control' type='date' {...register('dateOfBirth')}/>
                     {errors.dateOfBirth && <p className="error">{errors.dateOfBirth.message}</p>}
                 </div>
-                <SelectImage imgUrl={currentImageURL} selectedImage={file=> setValue('picture', file)}/>
+                    <SelectImage imgUrl={currentImageURL} selectedImage={file=> setValue('picture', file)}/>
                 <div className="mt-2">
                     <Button type='submit' disabled={!isValid || isSubmitting}>{isSubmitting ? 'Sending...' : 'Send'} </Button>
                     <NavLink to='/actors' className="btn btn-secondary ms-2">Cancel</NavLink>
