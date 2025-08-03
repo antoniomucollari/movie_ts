@@ -15,7 +15,7 @@ export default function CreateMovie() {
     return (
         <>
             <h3>Create Movie</h3>
-            <MovieForm nonSelectedTheaters={nonSelectedTheaters} selectedTheaters={[]} selectedGenres={[]} nonSelectedGenres={nonSelectedGenres} onSubmit={onSubmit}/>
+            <MovieForm selectedActors={[]} nonSelectedTheaters={nonSelectedTheaters} selectedTheaters={[]} selectedGenres={[]} nonSelectedGenres={nonSelectedGenres} onSubmit={onSubmit}/>
 
         </>
     )

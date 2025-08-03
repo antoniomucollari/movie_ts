@@ -11,9 +11,12 @@ import {useState} from "react";
 import type FilterMoviesDTO from "../../genres/models/Genre.model.ts";
 import type Theater from "../../theters/models/Theater.model.ts";
 import TypeAheadActors from "./TypeAheadActors.tsx";
+import type MovieActor from "../models/MovieActor.model.ts";
 export default function MovieForm(props: MovieFormProps) {
     const [nonSelectedGenres, setNonSelectedGenres] = useState(toMultipleSelection(props.nonSelectedGenres));
     const [selectedGenres, setSelectedGenres] = useState(toMultipleSelection(props.selectedGenres));
+
+    const [selectedActors, setSelectedActors] = useState(props.selectedActors);
 
     const [nonSelectedTheaters, setNonSelectedTheaters] = useState(toMultipleSelection(props.nonSelectedTheaters));
     const [selectedTheaters, setSelectedTheaters] = useState(toMultipleSelection(props.selectedTheaters));
@@ -33,6 +36,7 @@ export default function MovieForm(props: MovieFormProps) {
         data.genreIds = selectedGenres.map(x =>x.key);
         data.theaterIds = selectedTheaters.map(x =>x.key);
         props.onSubmit(data)
+        data.actors = selectedActors;
     }
     return (
         <>
@@ -71,7 +75,21 @@ export default function MovieForm(props: MovieFormProps) {
                     }}/>
                 </div>
                 <div className="form-group">
-                    <TypeAheadActors onCharacterChange={()=>{}} actors={[]} onAdd={actors=> console.log(actors)} onRemove={()=> {}}/>
+                    <TypeAheadActors onCharacterChange={(id, character)=>{
+                        const index = selectedActors.findIndex(ca => ca.id === id)
+                        const actors = [...selectedActors]
+                        actors[index].character = character
+                        setSelectedActors(actors);
+                        setValue('actors',actors)
+
+                    }} actors={selectedActors} onAdd={actors=> {
+                        setSelectedActors(actors)
+                        setValue('actors', actors)
+                    }} onRemove={(actor)=> {
+                        const actors = selectedActors.filter(ca=>ca != actor);
+                        setSelectedActors(actors);
+                        setValue('actors',actors)
+                    }}/>
                 </div>
                 <div className="mt-2">
                     <Button disabled={!isValid} type="submit">{isSubmitting ? 'Sending...' : 'Send'}</Button>
@@ -96,4 +114,5 @@ interface MovieFormProps{
     selectedGenres: FilterMoviesDTO[];
     nonSelectedTheaters: Theater[];
     selectedTheaters: Theater[];
+    selectedActors: MovieActor[];
 }

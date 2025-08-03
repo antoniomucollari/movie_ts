@@ -2,6 +2,7 @@
 import type MovieActor from "../models/MovieActor.model.ts";
 import type {Option} from "react-bootstrap-typeahead/types/types";
 import { Typeahead } from 'react-bootstrap-typeahead';
+import {useState} from "react";
 export default function TypeAheadActors(props: TypeAheadActorsProps) {
     const actors: MovieActor[] = [
         {
@@ -31,6 +32,22 @@ export default function TypeAheadActors(props: TypeAheadActorsProps) {
     ];
     const selection: MovieActor[] = [];
 
+    const [draggedElement, setDraggedElement] = useState<MovieActor | undefined>(undefined);
+
+    function handleDragStart(actor: MovieActor) {
+        setDraggedElement(actor)
+    }
+    function handleDragEnd(actor: MovieActor) {
+        if(!draggedElement || actor.id === draggedElement.id) return;
+        const actors = [...props.actors]
+        const fromIndex = actors.findIndex((ca) => ca.id === draggedElement.id);
+        const toIndex = actors.findIndex((ca) => ca.id === actor.id);
+        if(fromIndex !== -1 && toIndex !== -1) {
+            [actors[fromIndex], actors[toIndex]] = [actors[toIndex], actors[fromIndex]];
+            props.onAdd(actors)
+        }
+    }
+
     return (
         <>
             <label >Actors</label>
@@ -58,6 +75,21 @@ export default function TypeAheadActors(props: TypeAheadActorsProps) {
                 }}
                flip={true}
             />
+
+            <ul className="list-group">
+                {props.actors.map((actor) => <li onDragStart={()=>handleDragStart(actor)} onDragOver={()=> handleDragEnd(actor)} draggable={true} key={actor.id} className="list-group-item d-flex align-items-center">
+                    <div>
+                        <img style={{width:'64px'}} src={actor.picture} alt="picture"/>
+                    </div>
+                    <div style={{width:'150px', marginLeft:'1rem'}} >
+                        {actor.name}
+                    </div>
+                    <div className="flex-group-1 mx-3">
+                        <input value={actor.character} onChange={e=> props.onCharacterChange(actor.id, e.currentTarget.value)} type="text" className="form-control" placeholder="Character"/>
+                    </div>
+                    <span role="button" className="badge text-bg-secondary" onClick={()=>props.onRemove(actor)}>X</span>
+                </li>)}
+            </ul>
         </>
     )
 }
