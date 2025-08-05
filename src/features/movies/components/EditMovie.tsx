@@ -4,7 +4,7 @@ import type {SubmitHandler} from "react-hook-form";
 import Loading from "../../../components/Loading.tsx";
 import type MovieCreation from "../models/MovieCreation.model.ts";
 import MovieForm from "./MovieForm.tsx";
-import type FilterMoviesDTO from "../../genres/models/Genre.model.ts";
+import type Genre from "../../genres/models/Genre.model.ts";
 import type Theater from "../../theters/models/Theater.model.ts";
 
 
@@ -17,8 +17,8 @@ export default function EditMovies() {
         },800);
         return () => {clearTimeout(timerId);}
     }, [id]);
-    const nonSelectedGenres: FilterMoviesDTO[] = [{id:1, name: 'Action'}]
-    const selectedGenres: FilterMoviesDTO[] = [{id:2, name: 'Drama'}]
+    const nonSelectedGenres: Genre[] = [{id:1, name: 'Action'}]
+    const selectedGenres: Genre[] = [{id:2, name: 'Drama'}]
 
     const nonSelectedTheaters: Theater[] = [{id:1, name: 'Cineplexx', latitude: 12, longitude: 12}]
     const selectedTheaters: Theater[] = [{id:2, name: 'Millennium', latitude: 12, longitude: 12}]

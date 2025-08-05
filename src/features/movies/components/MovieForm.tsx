@@ -8,7 +8,7 @@ import SelectImage from "../../../components/SelectImage/SelectImage.tsx";
 import MultipleSelection from "../../../MultipleSelection/MultipleSelection.tsx";
 import type MultipleSelectionDTO from "../../../MultipleSelection/MultipleSelectionDTO.model.ts";
 import {useState} from "react";
-import type FilterMoviesDTO from "../../genres/models/Genre.model.ts";
+import type Genre from "../../genres/models/Genre.model.ts";
 import type Theater from "../../theters/models/Theater.model.ts";
 import TypeAheadActors from "./TypeAheadActors.tsx";
 import type MovieActor from "../models/MovieActor.model.ts";
@@ -110,8 +110,8 @@ const validationRules = yup.object({
 interface MovieFormProps{
     onSubmit: SubmitHandler<MovieCreation>;
     model?: MovieCreation;
-    nonSelectedGenres: FilterMoviesDTO[];
-    selectedGenres: FilterMoviesDTO[];
+    nonSelectedGenres: Genre[];
+    selectedGenres: Genre[];
     nonSelectedTheaters: Theater[];
     selectedTheaters: Theater[];
     selectedActors: MovieActor[];
