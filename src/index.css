@@ -1,3 +1,7 @@
 ﻿.error{
     color:red
 }
+
+.paginationCurrent{
+    background-color: #000;
+}
