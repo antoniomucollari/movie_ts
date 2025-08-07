@@ -12,7 +12,7 @@ export default function CreateGenre() {
     const [errors, setErrors] = useState<string[]>([]);
     const onSubmit : SubmitHandler<CreateGenreModel> = async (data) =>{
         try{
-            await apiClient.post("/Genre", data);
+            await apiClient.post("/genres", data);
             navigate("/genres");
         }catch(error){
             const errors = extractErrors(error as AxiosError);

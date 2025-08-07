@@ -3,14 +3,14 @@ import GenericList from "../../../components/GenericList.tsx";
 import Button from "../../../components/Button.tsx";
 import Pagination from "../../../components/Pagination.tsx";
 import Loading from "../../../components/Loading.tsx";
-import {useGenres} from "./hooks/useGenres.ts";
+import {useGenres} from "../hooks/useGenres.ts";
 import apiClient from "../../../api/apiClient.ts";
 import customConfirm from "../../../utils/customConfirm.ts";
 
 export default function IndexGenres(){
     const {loadRecords, loading, page,recordsPerPage, totalAmountOfRecords,setPage,setRecordsPerPage,genres, handleChildButtonClick} = useGenres();
     async function deleteGenre(genreId:number){
-        await apiClient.delete(`/genre/${genreId}`);
+        await apiClient.delete(`/genres/${genreId}`);
         if(page ===1){
             loadRecords();
         }

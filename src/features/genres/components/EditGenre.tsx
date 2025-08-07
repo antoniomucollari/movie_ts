@@ -16,13 +16,13 @@ export default function EditGenre() {
     const [model, setModel] = useState<CreateGenreModel | undefined>();
     const {id} = useParams()
     useEffect(()=>{
-        apiClient.get<Genre>(`/genre/${id}`).then(res=>{
+        apiClient.get<Genre>(`/genres/${id}`).then(res=>{
             setModel(res.data)
         })
     },[])
     const onSubmit : SubmitHandler<CreateGenreModel> = async (data) =>{
         try{
-            await apiClient.put(`/genre/${id}`, data);
+            await apiClient.put(`/genres/${id}`, data);
             navitgate(`/genres`)
         }
         catch(err){

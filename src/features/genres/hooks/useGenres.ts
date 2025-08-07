@@ -1,6 +1,6 @@
 ﻿import {useCallback, useEffect, useState} from "react";
-import type Genre from "../../models/Genre.model.ts";
-import apiClient from "../../../../api/apiClient.ts";
+import type Genre from "../models/Genre.model.ts";
+import apiClient from "../../../api/apiClient.ts";
 
 export function useGenres() {
     const [genres, setGenres] = useState<Genre[]>();
@@ -10,7 +10,7 @@ export function useGenres() {
     const [loading, setLoading] = useState(true);
     const handleChildButtonClick = ()=> setLoading(true);
     const loadRecords = useCallback(()=>{
-        apiClient.get('/genre', {params: {page,recordsPerPage}})
+        apiClient.get('/genres', {params: {page,recordsPerPage}})
             .then(res => {
                 const totalAmountOfRecords = parseInt(res.headers['total-records-count'],10)
                 setTotalAmountOfRecords(totalAmountOfRecords);

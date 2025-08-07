@@ -7,6 +7,7 @@ import firstLetterUpperCase from "../../validations/firstLetterUpperCase.ts";
 import dateMustNotBeInTheFuture from "../../validations/dateMustNotBeInTheFuture.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import SelectImage from "../../../components/SelectImage/SelectImage.tsx";
+import DisplayErrors from "../../../components/DisplayErrors.tsx";
 export default function ActorForm(props: ActorFormProps){
     const {register,handleSubmit, setValue,formState:{errors,isValid,isSubmitting}} = useForm<ActorCreation>({
         resolver: yupResolver(validationRules),
@@ -17,6 +18,7 @@ export default function ActorForm(props: ActorFormProps){
     const currentImageURL: string | undefined = props.model?.picture ? props.model.picture as string: undefined
     return (
         <>
+            <DisplayErrors errors={props.errors}/>
             <form onSubmit={handleSubmit(props.onSubmit)}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -42,6 +44,7 @@ export default function ActorForm(props: ActorFormProps){
 interface ActorFormProps{
     onSubmit: SubmitHandler<ActorCreation>;
     model?: ActorCreation;
+    errors: string[];
 }
 
 const validationRules = yup.object({
