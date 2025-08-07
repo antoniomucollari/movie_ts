@@ -1,62 +1,31 @@
-import {NavLink} from "react-router";
-import GenericList from "../../../components/GenericList.tsx";
-import Button from "../../../components/Button.tsx";
-import Pagination from "../../../components/Pagination.tsx";
-import Loading from "../../../components/Loading.tsx";
-import {useGenres} from "../hooks/useGenres.ts";
-import apiClient from "../../../api/apiClient.ts";
-import customConfirm from "../../../utils/customConfirm.ts";
+import {useEntities} from "../../../hooks/useEntities.ts";
+import type Genre from "../models/Genre.model.ts";
+import IndexEntities from "../../../components/IndexEntities.tsx";
 
 export default function IndexGenres(){
-    const {loadRecords, loading, page,recordsPerPage, totalAmountOfRecords,setPage,setRecordsPerPage,genres, handleChildButtonClick} = useGenres();
-    async function deleteGenre(genreId:number){
-        await apiClient.delete(`/genres/${genreId}`);
-        if(page ===1){
-            loadRecords();
-        }
-        else{
-            setPage(1);
-        }
-    }
+    const genresHook = useEntities<Genre>('/genres');
     return (
         <>
-            <h3>genres</h3>
-            <div className="mb-2">
-                <NavLink className="btn btn-primary" to='/genres/create'>Create Genre</NavLink>
-            </div>
-            {loading ? <Loading /> : <>
-            <GenericList list={genres}>
-                <table className="table table-hover align-middle shadow-sm border rounded overflow-hidden">
-                    <thead className="thead-light">
+            <IndexEntities<Genre> entity={"Genre"} title={"Genres"} {...genresHook}>
+                {(entities, buildButtons)=>
+                    <>
+                        <thead className="thead-light">
                         <tr>
                             <th scope="col">Name</th>
                             <th className="text-end" scope="col">Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {genres?.map(genre => <tr key={genre.id}>
+                        </thead>
+                        <tbody>
+                        {entities?.map(genre => <tr key={genre.id}>
                             <td>{genre.name}</td>
                             <td className="text-end">
-                                <NavLink to={`/genres/edit/${genre.id}`} className="btn btn-sm btn-outline-primary me-2 "><i className="bi bi-pencil me-1"></i> Edit</NavLink>
-                                <Button onClick={()=> {
-                                    customConfirm(()=> {
-                                        handleChildButtonClick()
-                                        deleteGenre(genre.id)
-                                    })
-                                }} className="btn btn-sm btn-outline-danger me-2"><i className="bi bi-trash me-1"></i>Delete</Button>
+                                {buildButtons(`/genres/edit/${genre.id}`, genre.id)}
                             </td>
                         </tr>)}
 
-                    </tbody>
-                </table>
-            </GenericList>
-            <div className="mb-2">
-                <Pagination onButtonClick={handleChildButtonClick} totalAmountOfRecords={totalAmountOfRecords} recordsPerPage={recordsPerPage} currentPage={page}
-                            onPaginateChange={
-                    (page, recordsPerPage) =>{setRecordsPerPage(recordsPerPage);setPage(page);
-                }} recordsPerPageOptions={[3,5,20,50 ]}/>
-            </div>
-            </>}
+                        </tbody>
+                    </>}
+            </IndexEntities>
         </>
     )
 }
