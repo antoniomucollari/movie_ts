@@ -5,8 +5,9 @@ import * as yup from "yup";
 import firstLetterUpperCase from "../../validations/firstLetterUpperCase.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import type TheaterCreation from "../models/TheaterCreation.ts";
+import Map from "../../../components/Map/Map.tsx";
 export default function TheaterForm(props: TheaterFormProps){
-    const {register,handleSubmit,formState:{errors,isValid,isSubmitting}} = useForm<ActorCreation>({
+    const {setValue, register,handleSubmit,formState:{errors,isValid,isSubmitting}} = useForm<TheaterCreation>({
         resolver: yupResolver(validationRules),
         defaultValues: props.model?? {name: ''},
         mode: "onChange"
@@ -21,8 +22,15 @@ export default function TheaterForm(props: TheaterFormProps){
                     <input id="name" autoComplete="off" className='form-control' {...register('name')}/>
                     {errors.name && <p className="error">{errors.name.message}</p>}
                 </div>
+
+                <div className="mt-4">
+                    <Map CoordinateProp={coor => {
+                        setValue('latitude', coor.lat, { shouldValidate: true });
+                        setValue('longitude', coor.lng, { shouldValidate: true });
+                    }} />
+                </div>
                 <div className="mt-2">
-                    <Button type='submit' disabled={!isValid || isSubmitting}>{isSubmitting ? 'Sending...' : 'Send'} </Button>
+                    <Button disabled={!isValid} type='submit' >{isSubmitting ? 'Sending...' : 'Send'} </Button>
                     <NavLink to='/theaters' className="btn btn-secondary ms-2">Cancel</NavLink>
                 </div>
             </form>
@@ -37,4 +45,6 @@ interface TheaterFormProps{
 
 const validationRules = yup.object({
     name: yup.string().required("Required").test(firstLetterUpperCase()),
+    latitude: yup.number().required("Required"),
+        longitude: yup.number().required("Required")
 })

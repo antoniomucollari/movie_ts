@@ -10,7 +10,7 @@ export default function EditTheater() {
     const {id} = useParams()
     useEffect(() => {
         const timerId = setTimeout(()=>{
-            setModel({name:'Sabil'})
+            setModel({name:'Sabil' + id, latitude: 0, longitude: 0})
         },800);
         return () => {clearTimeout(timerId);}
     }, [id]);
