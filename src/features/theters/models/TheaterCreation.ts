@@ -1,4 +1,4 @@
-﻿export default interface TheaterCreation {
+﻿export default interface    TheaterCreation {
     name: string;
     latitude: number;
     longitude: number;

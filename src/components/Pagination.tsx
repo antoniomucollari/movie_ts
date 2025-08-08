@@ -46,7 +46,6 @@
                                         onClick={() => {
                                             props.onButtonClick();
                                             props.onPaginateChange(page, props.recordsPerPage)
-                                            console.log(page, props.recordsPerPage);
                                         }}
                                         style={{
                                             backgroundColor: props.currentPage === page ? '#0d6efd' : '',

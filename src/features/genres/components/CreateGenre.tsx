@@ -13,6 +13,7 @@ export default function CreateGenre() {
     const onSubmit : SubmitHandler<CreateGenreModel> = async (data) =>{
         try{
             await apiClient.post("/genres", data);
+
             navigate("/genres");
         }catch(error){
             const errors = extractErrors(error as AxiosError);
