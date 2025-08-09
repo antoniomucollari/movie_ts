@@ -19,11 +19,12 @@ export default function TheaterForm(props: TheaterFormProps){
     function transformCoordinate(): Coordinate[] | undefined{
         if(props.model){
              const response: Coordinate = {
-                 lat: props.model.latitude,
-                 lng: props.model.longitude,
+                 lng: props.model.latitude,
+                 lat: props.model.longitude,
 
              }
              return [response];
+
         }
         return undefined;
     }

@@ -7,7 +7,6 @@ import Loading from "../../../components/Loading.tsx";
 import apiClient from "../../../api/apiClient.ts";
 import type Genre from "../models/Genre.model.ts";
 import extractErrors from "../../../utils/extractErrors.ts";
-import * as axios from "axios";
 import type {AxiosError} from "axios";
 
 export default function EditGenre() {

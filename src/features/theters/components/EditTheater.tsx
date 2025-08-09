@@ -20,8 +20,7 @@ export default function EditTheater() {
     }, [id]);
     const onSubmit : SubmitHandler<TheaterCreation> = async (data) =>{
         try{
-            console.log(data)
-            await apiClient.post('/theaters', data);
+            await apiClient.put(`/theaters/${id}`, data);
             navigate('/theaters');
         }
         catch(err){

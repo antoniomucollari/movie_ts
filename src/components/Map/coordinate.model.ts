@@ -1,5 +1,5 @@
 export default interface Coordinate {
-    lng: number;
     lat: number;
+    lng: number;
     message?:string;
 }
