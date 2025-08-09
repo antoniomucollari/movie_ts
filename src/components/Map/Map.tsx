@@ -1,11 +1,16 @@
 import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet";
 import type Coordinate from "./coordinate.model.ts";
 import {useState} from "react";
+import type {LatLngTuple} from "leaflet";
 
 export default function Map(props: MapProps){
     const [coordinates, setCoordinates] = useState(props.coordinates);
+    console.log(coordinates);
+    const CordinateArr: LatLngTuple  | undefined = coordinates?.map((coordinate) => {
+        return [coordinate.lat, coordinate.lng];
+    })[0];
     return (
-        <MapContainer center={[41.32932371556236, 19.761665860502337]} zoom={14} scrollWheelZoom={true} style={{height:'500px'}}>
+        <MapContainer center={CordinateArr?? [41.32853580329582, 19.82266119258898]} zoom={17} scrollWheelZoom={true} style={{height:'500px'}}>
             <TileLayer attribution="React Movies" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
             <HandleMapClick setCoordinate={cordi=>{
@@ -23,7 +28,6 @@ export default function Map(props: MapProps){
 
 function HandleMapClick(props: {setCoordinate(coordinate: Coordinate):void}){
     useMapEvent('click',e=>{
-        console.log(e.latlng.lat, e.latlng.lng);
         props.setCoordinate({lat: e.latlng.lat, lng: e.latlng.lng})
     })
     return null
