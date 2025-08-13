@@ -23,7 +23,7 @@ export default function EditTheater() {
             await apiClient.put(`/theaters/${id}`, data);
             navigate('/theaters');
         }
-        catch(err){
+        catch(err){       
             const errors = extractErrors(err as AxiosError)
             setError(errors)
         }

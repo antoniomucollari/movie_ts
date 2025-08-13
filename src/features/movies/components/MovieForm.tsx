@@ -12,6 +12,7 @@ import type Genre from "../../genres/models/Genre.model.ts";
 import type Theater from "../../theters/models/Theater.model.ts";
 import TypeAheadActors from "./TypeAheadActors.tsx";
 import type MovieActor from "../models/MovieActor.model.ts";
+import DisplayErrors from "../../../components/DisplayErrors.tsx";
 export default function MovieForm(props: MovieFormProps) {
     const [nonSelectedGenres, setNonSelectedGenres] = useState(toMultipleSelection(props.nonSelectedGenres));
     const [selectedGenres, setSelectedGenres] = useState(toMultipleSelection(props.selectedGenres));
@@ -26,7 +27,7 @@ export default function MovieForm(props: MovieFormProps) {
         mode: 'onChange',
         defaultValues: props.model ?? {title: ''}
     })
-    const currentImageURL: string | undefined =  props.model?.picture ? props.model.picture as string: undefined
+    const currentImageURL: string | undefined =  props.model?.poster ? props.model.poster as string: undefined
     function toMultipleSelection(array: {id: number, name: string}[]): MultipleSelectionDTO[] {
         return array.map(value =>{
             return {key : value.id, description : value.name}
@@ -40,6 +41,7 @@ export default function MovieForm(props: MovieFormProps) {
     }
     return (
         <>
+            <DisplayErrors errors={props.errors}/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
@@ -58,7 +60,7 @@ export default function MovieForm(props: MovieFormProps) {
                     <input id="trailer" autoComplete="off" className="form-control" {...register("trailer")} />
                     {errors.trailer && <p className="error">{errors.trailer.message}</p>}
                 </div>
-                <SelectImage imgUrl={currentImageURL} selectedImage={file=> setValue('picture', file)}/>
+                <SelectImage imgUrl={currentImageURL} selectedImage={file=> setValue('poster', file)}/>
                 <div className="form-group">
                     <label>Genres: </label>
                     <MultipleSelection selected={selectedGenres} nonSelected={nonSelectedGenres} onChange={(selected, nonSelected)=>{
@@ -115,4 +117,5 @@ interface MovieFormProps{
     nonSelectedTheaters: Theater[];
     selectedTheaters: Theater[];
     selectedActors: MovieActor[];
+    errors: string[];
 }

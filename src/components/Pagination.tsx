@@ -14,11 +14,12 @@
                 <div className="row align-items-start justify-content-center">
                     <div className="col-auto">
                         <div className="d-flex align-items-center gap-2">
-                            {/*<label className="mb-0">Records per page:</label>*/}
+                            <label className="mb-0">Records per page:</label>
                             <select
+                                value={props.recordsPerPage}
                                 onChange={e => props.onPaginateChange(1, parseInt(e.target.value, 10))}
                                 className="form-select form-select-sm w-auto"
-                                id=""
+                                id="recordsPerPageSelect"
                             >
                                 {props.recordsPerPageOptions.map(option => (
                                     <option key={option}>{option}</option>

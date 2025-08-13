@@ -18,12 +18,11 @@ export default function TheaterForm(props: TheaterFormProps){
 
     function transformCoordinate(): Coordinate[] | undefined{
         if(props.model){
-             return [{ lat: props.model.longitude, lng: props.model.latitude }];
+             return [{ lat: props.model.latitude, lng: props.model.longitude }];
 
         }
         return undefined;
     }
-    // const currentImageURL: string | undefined = props.model?.picture ? props.model.picture as string: undefined
     return (
         <>
             <DisplayErrors errors={props.errors} />

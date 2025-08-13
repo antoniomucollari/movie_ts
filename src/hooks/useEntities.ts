@@ -2,7 +2,7 @@
 import apiClient from "../api/apiClient.ts";
 export function useEntities<T>(url:string) {
     const [entities, setEntities] = useState<T[]>();
-    const [recordsPerPage, setRecordsPerPage] = useState(20);
+    const [recordsPerPage, setRecordsPerPage] = useState(5);
     const [page, setPage] = useState(1);
     const [totalAmountOfRecords, setTotalAmountOfRecords] = useState(0);
     const [loading, setLoading] = useState(true);

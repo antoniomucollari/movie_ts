@@ -1,38 +1,26 @@
 ﻿// import Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
 import type MovieActor from "../models/MovieActor.model.ts";
 import type {Option} from "react-bootstrap-typeahead/types/types";
-import { Typeahead } from 'react-bootstrap-typeahead';
 import {useState} from "react";
+import apiClient from "../../../api/apiClient.ts";
+import {AsyncTypeahead} from "react-bootstrap-typeahead";
 export default function TypeAheadActors(props: TypeAheadActorsProps) {
-    const actors: MovieActor[] = [
-        {
-            id: 1,
-            name: 'Al Pacino',
-            character: 'Tony Montana',
-            picture: 'https://upload.wikimedia.org/wikipedia/en/1/19/Tony_Montana_in_Scarface_%281983%29%2C_portrayed_by_Al_Pacino.jpg'
-        },
-        {
-            id: 2,
-            name: 'Robert De Niro',
-            character: 'Travis Bickle',
-            picture: 'https://upload.wikimedia.org/wikipedia/en/a/af/Travis_Bickle.jpeg'
-        },
-        {
-            id: 3,
-            name: 'Heath Ledger',
-            character: 'Joker',
-            picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Heath_Ledger_%282%29.jpg/500px-Heath_Ledger_%282%29.jpg'
-        },
-        {
-            id: 4,
-            name: 'Leonardo DiCaprio',
-            character: 'Jordan Belfort',
-            picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/500px-Leonardo_Dicaprio_Cannes_2019.jpg'
-        }
-    ];
+
+    const [actors, setActors] = useState<MovieActor[]>([]);
     const selection: MovieActor[] = [];
 
     const [draggedElement, setDraggedElement] = useState<MovieActor | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
+
+
+    function handleSearch(query: string) {
+        setLoading(true);
+        apiClient.get<MovieActor[]>(`/actors/search/${encodeURIComponent(query)}`).then((res) => {
+            setActors(res.data)
+            setLoading(false);
+        });
+
+    }
 
     function handleDragStart(actor: MovieActor) {
         setDraggedElement(actor)
@@ -51,7 +39,7 @@ export default function TypeAheadActors(props: TypeAheadActorsProps) {
     return (
         <>
             <label >Actors</label>
-            <Typeahead options={actors} filterBy={['name']}
+            <AsyncTypeahead isLoading={loading} onSearch={handleSearch} options={actors} filterBy={['name']}
                onChange={(actors: Option[])=>{
                    const selectedActor = actors[0] as MovieActor;
                    if (props.actors.findIndex(currentActor => currentActor.id === selectedActor.id) === -1) {

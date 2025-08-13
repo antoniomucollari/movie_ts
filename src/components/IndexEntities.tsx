@@ -27,14 +27,6 @@ export default function IndexEntities<T>({handleChildButtonClick, children, enti
                     deleteEntity(id)})
             }} className="btn btn-sm btn-outline-danger me-2"><i className="bi bi-trash me-1"></i>Delete</Button>
         </>
-
-
-    //////to do
-    // const handleChildButtonClick = ()=>{
-    //     console.log("TO DO")
-    // }
-    //
-
     return(
         <>
             <h3>{title}</h3>
@@ -52,7 +44,7 @@ export default function IndexEntities<T>({handleChildButtonClick, children, enti
                     <Pagination onButtonClick={handleChildButtonClick} totalAmountOfRecords={totalAmountOfRecords} recordsPerPage={recordsPerPage} currentPage={page}
                     onPaginateChange={
                         (page, recordsPerPage) =>{setRecordsPerPage(recordsPerPage);setPage(page)}}
-                        recordsPerPageOptions={[3,5,20,50 ]
+                        recordsPerPageOptions={[5,10,20,50 ]
                     }/>
                 </div>
             </>}

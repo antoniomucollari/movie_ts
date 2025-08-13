@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router";
-import LoadingPage from "./features/home/component/LoadingPage.tsx";
+import LandingPage from "./features/home/component/LandingPage.tsx";
 import IndexGenres from "./features/genres/components/indexGenres.tsx";
 import CreateGenre from "./features/genres/components/CreateGenre.tsx";
 import EditGenre from "./features/genres/components/EditGenre.tsx";
@@ -19,7 +19,7 @@ export default function AppRoutes(){
     return (
         <>
             <Routes>
-                <Route path="/" element={<LoadingPage/>}/>
+                <Route path="/" element={<LandingPage/>}/>
                 <Route path="/genres" element={<IndexGenres/>}/>
                 <Route path="/genres/create" element={<CreateGenre/>}/>
                 <Route path="/genres/edit/:id" element={<EditGenre/>}/>
@@ -28,6 +28,7 @@ export default function AppRoutes(){
                 <Route path="/movies" element={<MovieDetail/>}/>
                 <Route path="/movies/create" element={<CreateMovie/>}/>
                 <Route path="/movies/edit/:id" element={<EditMovies/>}/>
+                <Route path="/movie/:id" element={<MovieDetail/>}/>
 
                 <Route path="/actors" element={<IndexActors/>}/>
                 <Route path="/actors/create" element={<CreateActor/>}/>

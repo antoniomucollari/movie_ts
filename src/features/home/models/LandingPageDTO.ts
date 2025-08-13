@@ -1,6 +1,6 @@
 import type Movie from "../../movies/models/movie.model.ts";
 
-export default interface LoadingPageDTO {
+export default interface LandingPageDTO {
     inTheaters?: Movie[];
-    upComing?: Movie[];
+    upcomingReleases?: Movie[];
 }
