@@ -4,6 +4,7 @@ import type LandingPageDTO from "../models/LandingPageDTO.ts";
 import apiClient from "../../../api/apiClient.ts";
 import Loading from "../../../components/Loading.tsx";
 import AlertContext from "../../../utils/AlertContext.ts";
+import Authorized from "../../security/Authorized.tsx";
 
 export default function LandingPage() {
     const [movies,setMovies] = useState<LandingPageDTO>({})
@@ -18,6 +19,7 @@ export default function LandingPage() {
             {!(movies.inTheaters || movies.upcomingReleases)? <Loading />:
                 <>
                     <AlertContext.Provider value={loadMovies}>
+                        <Authorized claims={['isadmin', 'issales']} authorized={<>Authorized</>} notAuthorized={<>You are not Authorized</>}></Authorized>
                         <h3>In Theaters:</h3>
                         <MoviesList movies={movies.inTheaters}/>
                         <h3>Upcoming movies:</h3>

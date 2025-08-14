@@ -9,3 +9,4 @@ export default function HandleRouteNotFound() {
     },[location]);
     return <Navigate to="/"></Navigate>
 }
+
