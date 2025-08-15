@@ -1,5 +1,5 @@
 import {type ReactNode, useContext, useEffect, useState} from "react";
-import AuthenticationContext from "./utils/AuthenticationContext"
+import AuthenticationContext from "../utils/AuthenticationContext.ts"
 export default function Authorized (props: AuthorizedProps) {
     const [authorized, setAuthorized] = useState(false);
 
@@ -12,21 +12,21 @@ export default function Authorized (props: AuthorizedProps) {
                 const claimIndex = claims.findIndex(c=> c.name === claim)
                 if(claimIndex > -1){
                     setAuthorized(true)
+                    return
                 }
             }
             setAuthorized(false)
-        }
-        setAuthorized(claims.length> 0 );
+        }else{setAuthorized(claims.length > 0 )}
     }, [claims,props.claims]);
     return (
         <>
-            {authorized ? props.authorized:<>props.notAuthorized</> }
+            {authorized ? props.authorized:<></> }
         </>
     )
 }
 
 interface AuthorizedProps {
     authorized : ReactNode;
-    notAuthorized : ReactNode;
+    notAuthorized? : ReactNode;
     claims: string[]
 }

@@ -8,7 +8,7 @@ import {useState} from "react";
 import type Claim from "./features/security/models/Claim.model.ts";
 
 function App() {
-    const [claims, setClaims] = useState<Claim[]>([{name: 'gay', value: 'aa'}]);
+    const [claims, setClaims] = useState<Claim[]>([{name: 'isadmin', value: 'aa'}]);
     function updateClaims(claimsProp: Claim[]) {
         setClaims(claimsProp);
     }

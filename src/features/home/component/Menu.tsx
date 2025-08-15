@@ -1,4 +1,7 @@
 ﻿import {NavLink} from "react-router";
+import Button from "../../../components/Button.tsx";
+import customConfirm from "../../../utils/customConfirm.ts";
+import Authorized from "../../security/component/Authorized.tsx";
 
 export default function Menu(){
     return (
@@ -10,18 +13,23 @@ export default function Menu(){
                         <li className="nav-item">
                             <NavLink to="/movies/filter" className="nav-link">Filter Movies</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/actors" className="nav-link">Actors</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/genres" className="nav-link">Genres</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/theaters" className="nav-link">Theaters</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/movies/create" className="nav-link">Create Movie</NavLink>
-                        </li>
+                        <Authorized authorized={<>
+                            <li className="nav-item">
+                                <NavLink to="/actors" className="nav-link">Actors</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to="/genres" className="nav-link">Genres</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to="/theaters" className="nav-link">Theaters</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to="/movies/create" className="nav-link">Create Movie</NavLink>
+                            </li>
+                        </>}
+                                    claims={['isadmin']}></Authorized>
+
+
                     </ul>
                 </div>
             </div>
