@@ -26,8 +26,7 @@ export default function Menu(){
                             <li className="nav-item">
                                 <NavLink to="/movies/create" className="nav-link">Create Movie</NavLink>
                             </li>
-                        </>}
-                                    claims={['isadmin']}></Authorized>
+                        </>} claims={['isadmin']}></Authorized>
 
 
                     </ul>

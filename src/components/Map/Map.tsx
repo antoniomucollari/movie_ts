@@ -10,15 +10,15 @@ export default function Map(props: MapProps){
         return [coordinate.lat, coordinate.lng];
     })[0];
     return (
-        <MapContainer center={CordinateArr?? [41.32853580329582, 19.82266119258898]} zoom={17} scrollWheelZoom={true} style={{height:'500px'}}>
+        <MapContainer center={CordinateArr?? [41.32853580329582, 19.82266119258898]} zoom={12} scrollWheelZoom={true} style={{height:'500px'}}>
             <TileLayer attribution="React Movies" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
-            <HandleMapClick setCoordinate={cordi=>{
+            {!props.notAllowClicks? <HandleMapClick setCoordinate={cordi=>{
                 setCoordinates([cordi])
                 if (props.CoordinateProp){
                     props.CoordinateProp(cordi)
                 }
-            }} />
+            }} /> : undefined}
             {coordinates?.map((coordinate) => <Marker position={[coordinate.lat, coordinate.lng]} key={coordinate.lat + coordinate.lng}>
                 {coordinate.message ?  <Popup> {coordinate.message}</Popup> : undefined}
             </Marker>)}
@@ -36,4 +36,5 @@ function HandleMapClick(props: {setCoordinate(coordinate: Coordinate):void}){
 interface MapProps {
     coordinates?: Coordinate[];
     CoordinateProp?: (coordinate: Coordinate) => void;
+    notAllowClicks?: boolean;
 }

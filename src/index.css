@@ -5,3 +5,8 @@
 .paginationCurrent{
     background-color: #000;
 }
+
+.smaller-text {
+    font-size: 0.7em;  /* make it smaller */
+    /*margin-left: 0.5rem; !* space between title and year *!*/
+}

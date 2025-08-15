@@ -3,4 +3,5 @@ export default interface Actor{
     name: string;
     dateOfBirth: string;
     picture?: string;
+    character?: string;
 }
