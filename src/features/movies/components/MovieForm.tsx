@@ -110,7 +110,7 @@ const validationRules = yup.object({
     picture: yup.mixed()
 })
 interface MovieFormProps{
-     : SubmitHandler<MovieCreation>;
+    onSubmit: SubmitHandler<MovieCreation>;
     model?: MovieCreation;
     nonSelectedGenres: Genre[];
     selectedGenres: Genre[];

@@ -15,6 +15,8 @@ import CreateTheater from "./features/theters/components/CreateTheater.tsx";
 import EditTheater from "./features/theters/components/EditTheater.tsx";
 import HandleRouteNotFound from "./features/home/component/HandleRouteNotFound.tsx";
 import ProtectRoute from "./features/security/component/ProtectRoute.tsx";
+import Register from "./features/security/component/Register.tsx";
+import Login from "./features/security/component/Login.tsx";
 
 export default function AppRoutes(){
     return (
@@ -38,6 +40,8 @@ export default function AppRoutes(){
 
                 <Route path="/movies/filter" element={<FilterMovies/>}/>
                 <Route path="/movie/:id" element={<MovieDetail/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/login" element={<Login/>}/>
 
 
 

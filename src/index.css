@@ -10,3 +10,7 @@
     font-size: 0.7em;  /* make it smaller */
     /*margin-left: 0.5rem; !* space between title and year *!*/
 }
+
+.logout-btn{
+    color: #0d6efd !important;
+}

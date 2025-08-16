@@ -20,7 +20,7 @@ export default function Authorized (props: AuthorizedProps) {
     }, [claims,props.claims]);
     return (
         <>
-            {authorized ? props.authorized:<></> }
+            {authorized ? props.authorized : props.notAuthorized ?? <></>}
         </>
     )
 }
