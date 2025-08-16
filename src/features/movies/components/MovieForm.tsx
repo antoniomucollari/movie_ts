@@ -36,8 +36,9 @@ export default function MovieForm(props: MovieFormProps) {
     const onSubmit: SubmitHandler<MovieCreation> = data =>{
         data.genreIds = selectedGenres.map(x =>x.key);
         data.theaterIds = selectedTheaters.map(x =>x.key);
-        props.onSubmit(data)
         data.actors = selectedActors;
+        setValue('actors',selectedActors)
+        props.onSubmit(data)
     }
     return (
         <>
@@ -82,11 +83,10 @@ export default function MovieForm(props: MovieFormProps) {
                         const actors = [...selectedActors]
                         actors[index].character = character
                         setSelectedActors(actors);
-                        setValue('actors',actors)
-
-                    }} actors={selectedActors} onAdd={actors=> {
+                    }}
+                     actors={selectedActors}
+                     onAdd={actors=> {
                         setSelectedActors(actors)
-                        setValue('actors', actors)
                     }} onRemove={(actor)=> {
                         const actors = selectedActors.filter(ca=>ca != actor);
                         setSelectedActors(actors);

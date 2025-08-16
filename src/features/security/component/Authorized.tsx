@@ -11,11 +11,11 @@ export default function Authorized (props: AuthorizedProps) {
                 const claim = props.claims[i]
                 const claimIndex = claims.findIndex(c=> c.name === claim)
                 if(claimIndex > -1){
-                    setAuthorized(true)
+                    setAuthorized(false)
                     return
                 }
             }
-            setAuthorized(false)
+            setAuthorized(true)
         }else{setAuthorized(claims.length > 0 )}
     }, [claims,props.claims]);
     return (

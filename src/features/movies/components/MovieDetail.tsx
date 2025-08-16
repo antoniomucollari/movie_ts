@@ -5,6 +5,9 @@ import type Movie from "../models/movie.model.ts";
 import Loading from "../../../components/Loading.tsx";
 import type Coordinate from "../../../components/Map/coordinate.model.ts";
 import Map from "../../../components/Map/Map.tsx";
+import Rating from "../../../components/Ratings/Rating.tsx";
+import type RatingCreation from "../../../components/Ratings/RatingCreation.model.ts";
+import Swal from "sweetalert2";
 
 
 export default function MovieDetail() {
@@ -33,6 +36,16 @@ export default function MovieDetail() {
             return coordinate;
         })
     }
+    async function handleVote(vote:number){
+        try{
+            const data: RatingCreation = {movieId: Number(id), rate: vote}
+            await apiClient.post<Movie>(`/ratings`, data)
+            Swal.fire({icon: 'success', title: 'Successfully voted',})
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     return (
         <>
             <div className="contaner my-4">
@@ -45,7 +58,7 @@ export default function MovieDetail() {
                         </span>)}
                     </div>
                 )}
-                <p className="text-muted">Release date: {date.toLocaleDateString()}</p>
+                <p className="text-muted">Release date: {date.toLocaleDateString()}| Average rate: {movie.averageRate ?? '-' } | My rating: <Rating selectedVote={movie.userVote} onVote={handleVote} maxRating={5}/> </p>
                 <div className="d-flex">
                     <span className="d-inline-block me-4">
                         <img src={movie.poster} style={{width: '225px', height:'315px'}} alt=""/>

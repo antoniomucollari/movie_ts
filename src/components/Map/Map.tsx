@@ -5,7 +5,6 @@ import type {LatLngTuple} from "leaflet";
 
 export default function Map(props: MapProps){
     const [coordinates, setCoordinates] = useState(props.coordinates);
-    console.log(coordinates);
     const CordinateArr: LatLngTuple  | undefined = coordinates?.map((coordinate) => {
         return [coordinate.lat, coordinate.lng];
     })[0];

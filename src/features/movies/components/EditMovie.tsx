@@ -29,7 +29,6 @@ export default function EditMovies() {
             }
             setModel(movieCreation);
             setMoviesPutGet(res.data)
-            console.log(res.data.selectedTheaters)
         })
     }, [id]);
 
