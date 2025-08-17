@@ -5,7 +5,6 @@ export default function Authorized(props: AuthorizedProps) {
     const { claims } = useContext(AuthenticationContext);
 
     useEffect(() => {
-        console.log(claims);
         if (props.claims && props.claims.length > 0) {
             // check if *all required claims* exist in the user's claims
             const hasClaim = props.claims.every(requiredClaim =>

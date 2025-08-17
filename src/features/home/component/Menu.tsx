@@ -20,7 +20,7 @@ export default function Menu(){
                         <li className="nav-item">
                             <NavLink to="/movies/filter" className="nav-link">Filter Movies</NavLink>
                         </li>
-                        <Authorized authorized={<>
+                        <Authorized claims={["isadmin"]} authorized={<>
                             <li className="nav-item">
                                 <NavLink to="/actors" className="nav-link">Actors</NavLink>
                             </li>
@@ -42,7 +42,7 @@ export default function Menu(){
                     </ul>
 
                     <div className="d-flex">
-                        <Authorized claims={["isadmin"]} authorized={<>
+                        <Authorized authorized={<>
                             <span className="nav-link">Hello, {getUserName()}</span>
                             <Button className="nav-link btn btn-link ms-2 logout-btn" onClick={()=>{
                                 logout();
