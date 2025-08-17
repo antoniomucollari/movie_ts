@@ -5,9 +5,9 @@ import type {LatLngTuple} from "leaflet";
 
 export default function Map(props: MapProps){
     const [coordinates, setCoordinates] = useState(props.coordinates);
-    const CordinateArr: LatLngTuple  | undefined = coordinates?.map((coordinate) => {
-        return [coordinate.lat, coordinate.lng];
-    })[0];
+    const first = coordinates?.[0];
+    const CordinateArr: LatLngTuple | undefined = first ? [first.lat, first.lng] : undefined;
+
     return (
         <MapContainer center={CordinateArr?? [41.32853580329582, 19.82266119258898]} zoom={12} scrollWheelZoom={true} style={{height:'500px'}}>
             <TileLayer attribution="React Movies" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>

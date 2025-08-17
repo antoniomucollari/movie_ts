@@ -9,7 +9,6 @@ import { useContext, useState } from "react";
 import AuthenticationContext from "../utils/AuthenticationContext.ts";
 import {NavLink, useNavigate} from "react-router";
 import type { AxiosError } from "axios";
-import extractErrors from "../../../utils/extractErrors.ts";
 import DisplayErrors from "../../../components/DisplayErrors.tsx";
 import Button from "../../../components/Button.tsx";
 import extractIdentityErrors from "../utils/ExtractIdentityErrors.ts";

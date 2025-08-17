@@ -6,7 +6,6 @@ import Loading from "../../../components/Loading.tsx";
 import type Coordinate from "../../../components/Map/coordinate.model.ts";
 import Map from "../../../components/Map/Map.tsx";
 import Rating from "../../../components/Ratings/Rating.tsx";
-import type RatingCreation from "../../../components/Ratings/RatingCreation.model.ts";
 import Swal from "sweetalert2";
 import {userIsLoggedIn} from "../../security/utils/HandleJWT.ts";
 

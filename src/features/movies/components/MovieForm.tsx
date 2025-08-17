@@ -43,7 +43,7 @@ export default function MovieForm(props: MovieFormProps) {
     return (
         <>
             <DisplayErrors errors={props.errors}/>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(()=> onSubmit)}>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
                     <input id="title" autoComplete="off" className="form-control" {...register("title")} />
@@ -106,9 +106,16 @@ export default function MovieForm(props: MovieFormProps) {
 const validationRules = yup.object({
     title: yup.string().required("Name is required"),
     releaseDate: yup.string().required("Date is Required"),
-    trailer: yup.string(),
-    picture: yup.mixed()
-})
+    trailer: yup.string().optional(),
+    poster: yup.mixed<File>().optional(),
+    genreIds: yup.array(yup.number()).optional(),
+    theaterIds: yup.array(yup.number()).optional(),
+    actors: yup.array(yup.object({
+        id: yup.number(),
+        name: yup.string(),
+        character: yup.string(),
+    })).optional()
+});
 interface MovieFormProps{
     onSubmit: SubmitHandler<MovieCreation>;
     model?: MovieCreation;
