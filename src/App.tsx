@@ -6,7 +6,7 @@ import AppRoutes from "./AppRoutes.tsx";
 import AuthenticationContext from "./features/security/utils/AuthenticationContext.ts";
 import {useEffect, useState} from "react";
 import type Claim from "./features/security/models/Claim.model.ts";
-import {getClaims, getToken} from "./features/security/utils/HandleJWT.ts";
+import {getClaims} from "./features/security/utils/HandleJWT.ts";
 
 function App() {
     const [claims, setClaims] = useState<Claim[]>([]);

@@ -5,7 +5,7 @@ import Button from "../../../components/Button.tsx";
 import type {EditClaim} from "../models/EditClaim.model.ts";
 import apiClient from "../../../api/apiClient.ts";
 import Swal from "sweetalert2";
-import {getClaims, logout} from "../utils/HandleJWT.ts";
+import {logout} from "../utils/HandleJWT.ts";
 import {useContext} from "react";
 import AuthenticationContext from "../utils/AuthenticationContext.ts";
 

@@ -1,6 +1,5 @@
 ﻿import {NavLink} from "react-router";
 import Button from "../../../components/Button.tsx";
-import customConfirm from "../../../utils/customConfirm.ts";
 import Authorized from "../../security/component/Authorized.tsx";
 import {useContext} from "react";
 import AuthenticationContext from "../../security/utils/AuthenticationContext.ts";
