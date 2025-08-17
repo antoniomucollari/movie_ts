@@ -8,16 +8,18 @@ import Map from "../../../components/Map/Map.tsx";
 import Rating from "../../../components/Ratings/Rating.tsx";
 import type RatingCreation from "../../../components/Ratings/RatingCreation.model.ts";
 import Swal from "sweetalert2";
+import {userIsLoggedIn} from "../../security/utils/HandleJWT.ts";
 
 
 export default function MovieDetail() {
     const {id} = useParams();
     const [movie,setMovie] = useState<Movie>();
+    const [refreshKey, setRefreshKey] = useState(0);
     useEffect(() => {
         apiClient.get<Movie>(`/movies/${id}`).then(res => {
             setMovie(res.data);
             })
-    }, [id]);
+    }, [id, refreshKey]);
     if(!movie){
         return <Loading/>
     }
@@ -37,10 +39,16 @@ export default function MovieDetail() {
         })
     }
     async function handleVote(vote:number){
+        const isUserLoggedIn = userIsLoggedIn();
+        if(!isUserLoggedIn){
+            Swal.fire({icon:"error",title:"You have to login to vote!"});
+            return;
+        }
         try{
-            const data: RatingCreation = {movieId: Number(id), rate: vote}
-            await apiClient.post<Movie>(`/ratings`, data)
+            const data = {movieId: Number(id), rate: vote}
+            await apiClient.post(`/ratings`, data)
             Swal.fire({icon: 'success', title: 'Successfully voted',})
+            setRefreshKey(prev => prev + 1)
         }
         catch(err){
             console.log(err)
@@ -58,7 +66,7 @@ export default function MovieDetail() {
                         </span>)}
                     </div>
                 )}
-                <p className="text-muted">Release date: {date.toLocaleDateString()}| Average rate: {movie.averageRate ?? '-' } | My rating: <Rating selectedVote={movie.userVote} onVote={handleVote} maxRating={5}/> </p>
+                <p className="text-muted">Release date: {date.toLocaleDateString()}| Average rate: {movie.averageVote === 0 ? '-' : movie.averageVote} | My rating: <Rating selectedVote={movie.userVote} onVote={handleVote} maxRating={5}/> </p>
                 <div className="d-flex">
                     <span className="d-inline-block me-4">
                         <img src={movie.poster} style={{width: '225px', height:'315px'}} alt=""/>

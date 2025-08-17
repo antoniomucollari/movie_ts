@@ -12,7 +12,7 @@ export default function Rating(props: RatingProps){
         setTempSelectedValue(vote)
     }
     function onMouseLeave(){
-        setTempSelectedValue(vote)
+            setTempSelectedValue(vote)
     }
     function onClick(vote: number){
         setTempSelectedValue(vote)

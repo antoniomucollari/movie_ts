@@ -17,6 +17,7 @@ import HandleRouteNotFound from "./features/home/component/HandleRouteNotFound.t
 import ProtectRoute from "./features/security/component/ProtectRoute.tsx";
 import Register from "./features/security/component/Register.tsx";
 import Login from "./features/security/component/Login.tsx";
+import IndexUsers from "./features/security/component/IndexUsers.tsx";
 
 export default function AppRoutes(){
     return (
@@ -35,6 +36,7 @@ export default function AppRoutes(){
                     <Route path="/theaters" element={<IndexTheaters/>}/>
                     <Route path="/theaters/create" element={<CreateTheater/>}/>
                     <Route path="/theaters/edit/:id" element={<EditTheater/>}/>
+                    <Route path='/users' element={<IndexUsers/>}/>
                 </Route>
 
 

@@ -15,6 +15,7 @@ export function getClaims(): Claim[]{
     }
     const expirationDate = new Date(expiration);
     if (isNaN(expirationDate.getTime()) || expirationDate <=new Date()){
+        console.log("token expired");
         logout();
         return [];
     }
@@ -40,4 +41,9 @@ export function logout(){
 
 export function getToken(){
     return localStorage.getItem("tokenKey");
+}
+
+export function userIsLoggedIn(){
+    const claims = getClaims();
+    return claims.length > 0
 }

@@ -33,13 +33,16 @@ export default function Menu(){
                             <li className="nav-item">
                                 <NavLink to="/movies/create" className="nav-link">Create Movie</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink to="/users" className="nav-link">Users</NavLink>
+                            </li>
                         </>}/>
 
 
                     </ul>
 
                     <div className="d-flex">
-                        <Authorized authorized={<>
+                        <Authorized claims={["isadmin"]} authorized={<>
                             <span className="nav-link">Hello, {getUserName()}</span>
                             <Button className="nav-link btn btn-link ms-2 logout-btn" onClick={()=>{
                                 logout();

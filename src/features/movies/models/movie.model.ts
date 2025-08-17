@@ -11,6 +11,6 @@ export default interface  Movie{
     genres?: Genre[];
     theaters?: Theater[];
     actors?: Actor[];
-    averageRate: number;
+    averageVote: number;
     userVote: number;
 }
