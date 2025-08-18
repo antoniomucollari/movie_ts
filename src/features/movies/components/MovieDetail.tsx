@@ -70,7 +70,7 @@ export default function MovieDetail() {
                         </span>)}
                     </div>
                 )}
-                <p className="text-muted">Release date: {date.toLocaleDateString()}| Average rate: {movie.averageVote === 0 ? '-' : movie.averageVote} | My rating: <Rating selectedVote={movie.userVote} onVote={handleVote} maxRating={5}/> </p>
+                <p className="text-muted">Release date: {date.toLocaleDateString()} | Average rate: {movie.averageVote === 0 ? '-' : movie.averageVote} | My rating: <Rating selectedVote={movie.userVote} onVote={handleVote} maxRating={5}/> </p>
                 <div className="d-flex">
                     <span className="d-inline-block me-4">
                         <img src={movie.poster} style={{width: '225px', height:'315px'}} alt=""/>
