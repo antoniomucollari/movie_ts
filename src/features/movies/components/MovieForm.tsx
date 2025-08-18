@@ -105,17 +105,8 @@ export default function MovieForm(props: MovieFormProps) {
 }
 const validationRules = yup.object({
     title: yup.string().required("Name is required"),
-    releaseDate: yup.string().required("Date is Required"),
-    trailer: yup.string().optional(),
-    poster: yup.mixed<File>().optional(),
-    genreIds: yup.array(yup.number()).optional(),
-    theaterIds: yup.array(yup.number()).optional(),
-    actors: yup.array(yup.object({
-        id: yup.number(),
-        name: yup.string(),
-        character: yup.string(),
-    })).optional()
-});
+    releaseDate: yup.string().required("Date is Required")
+})
 interface MovieFormProps{
     onSubmit: SubmitHandler<MovieCreation>;
     model?: MovieCreation;
