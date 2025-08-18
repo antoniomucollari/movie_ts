@@ -43,7 +43,7 @@ export default function MovieForm(props: MovieFormProps) {
     return (
         <>
             <DisplayErrors errors={props.errors}/>
-            <form onSubmit={handleSubmit(()=> onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
                     <input id="title" autoComplete="off" className="form-control" {...register("title")} />
