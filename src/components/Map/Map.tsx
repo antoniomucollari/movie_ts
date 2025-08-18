@@ -3,8 +3,17 @@ import type Coordinate from "./coordinate.model.ts";
 import {useRef, useState} from "react";
 import type {LatLngTuple} from "leaflet";
 import type { Marker as LeafletMarker } from "leaflet";
-
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 export default function Map(props: MapProps){
+    L.Icon.Default.mergeOptions({
+        iconUrl: iconUrl,
+        iconRetinaUrl: iconRetinaUrl,
+        shadowUrl: shadowUrl,
+    });
     const [coordinates, setCoordinates] = useState(props.coordinates);
     const first = coordinates?.[0];
     const CordinateArr: LatLngTuple | undefined = first ? [first.lat, first.lng] : undefined;
