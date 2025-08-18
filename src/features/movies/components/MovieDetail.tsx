@@ -25,10 +25,14 @@ export default function MovieDetail() {
 
     const date = new Date(movie.releaseDate);
     const year = date.getFullYear();
-    function getYoutubeEmbedUrl(url: string):string | undefined {
-        const objUrl = new URL(url);
-        const videoId = objUrl.searchParams.get("v");
-        return videoId ? `https://www.youtube.com/embed/${videoId}`: undefined;
+    function getYoutubeEmbedUrl(url?: string): string | undefined {
+        try {
+            const objUrl = new URL(url ?? "");
+            const videoId = objUrl.searchParams.get("v");
+            return videoId ? `https://www.youtube.com/embed/${videoId}` : undefined;
+        } catch {
+            return undefined;
+        }
     }
 
     function transformCoordinates():Coordinate[]{
@@ -53,6 +57,7 @@ export default function MovieDetail() {
             console.log(err)
         }
     }
+    const embedUrl = getYoutubeEmbedUrl(movie.trailer);
     return (
         <>
             <div className="contaner my-4">
@@ -70,9 +75,17 @@ export default function MovieDetail() {
                     <span className="d-inline-block me-4">
                         <img src={movie.poster} style={{width: '225px', height:'315px'}} alt=""/>
                     </span>
-                    <div>
-                        <iframe width="565" height="315" src={getYoutubeEmbedUrl(movie.trailer)} title="trailer" allowFullScreen></iframe>
-                    </div>
+                    {embedUrl && (
+                        <div>
+                            <iframe
+                                width="565"
+                                height="315"
+                                src={embedUrl}
+                                title="trailer"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    )}
                 </div>
                 {movie.actors && movie.actors.length > 0 && (
                     <div className="mb-2">

@@ -52,7 +52,7 @@ export default function FilterMovies(){
         const res = await apiClient.get('movies/filter',{params: {...values,page,recordsPerPage}})
         setLoading(false);
         setMovies(res.data)
-        const totalAmountOfRecords = parseInt(res.data.headers['total-records-count'],10)
+        const totalAmountOfRecords = parseInt(res.headers['total-records-count'],10)
         setTotalAmountOfRecords(totalAmountOfRecords)
     }
     const initialValues: FilterMoviesDTO = {

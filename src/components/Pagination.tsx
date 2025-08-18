@@ -60,6 +60,8 @@
                             <li className={`page-item ${props.currentPage === amountOfPages ? 'disabled' : ''}`}>
                                 <button
                                     onClick={() => {
+                                        console.log(props.currentPage + 'props.currentPage')
+                                        console.log(amountOfPages)
                                         props.onButtonClick();
                                         props.onPaginateChange(props.currentPage + 1, props.recordsPerPage)
                                     }}
