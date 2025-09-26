@@ -1,0 +1,148 @@
+.error {
+  color: red;
+}
+
+.paginationCurrent {
+  background-color: #000;
+}
+
+.smaller-text {
+  font-size: 0.7em; /* make it smaller */
+  /*margin-left: 0.5rem; !* space between title and year *!*/
+}
+
+.logout-btn {
+  color: #0d6efd !important;
+}
+
+/* Responsive navbar styles */
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-nav {
+    margin-bottom: 1rem;
+  }
+
+  .d-flex.flex-column.flex-lg-row {
+    gap: 0.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+}
+
+/* Button hover effects */
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon spacing */
+.navbar-nav .nav-link i {
+  width: 16px;
+  text-align: center;
+}
+
+/* User greeting styling */
+.navbar .d-flex .nav-link {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Welcome Modal Styles */
+.welcome-modal {
+  z-index: 9999;
+}
+
+.welcome-modal .modal-content {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-modal .modal-header {
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: none;
+}
+
+.welcome-modal .modal-footer {
+  border-radius: 0 0 1rem 1rem;
+  border-top: none;
+}
+
+.welcome-modal .alert {
+  border: none;
+  border-radius: 0.75rem;
+}
+
+.welcome-modal .input-group .btn {
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.welcome-modal .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Copy button hover effect */
+.welcome-modal .btn-outline-secondary:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+/* Responsive modal adjustments */
+@media (max-width: 768px) {
+  .welcome-modal .modal-dialog {
+    margin: 1rem;
+  }
+
+  .welcome-modal .display-1 {
+    font-size: 3rem;
+  }
+
+  .welcome-modal .row.g-3 {
+    --bs-gutter-x: 0.75rem;
+  }
+}
+
+/* Animation for modal appearance */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.welcome-modal .modal-content {
+  animation: modalFadeIn 0.3s ease-out;
+}
